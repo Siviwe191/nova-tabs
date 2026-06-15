@@ -159,6 +159,35 @@ export default {
   },
 
   methods: {
+
+    /**
+    * Returns true if the given color looks like a direct CSS color (hex, rgb[a], hsl[a], or named color)
+    */
+    isDirectCssColor(color) {
+      if (!color || typeof color !== 'string') return false;
+      const c = color.trim();
+      // Hex (#RGB, #RRGGBB, #RRGGBBAA)
+      if (/^#([0-9a-f]{3,8})$/i.test(c)) return true;
+      // rgb/rgba/hsl/hsla
+      if (/^(rgb|rgba|hsl|hsla)\(/i.test(c)) return true;
+      // CSS named colors (basic heuristic: letters only)
+      if (/^[a-z]+$/i.test(c)) return true;
+      return false;
+    },
+    /**
+    * Compute inline style object for a tab anchor, applying background/text/underline color
+    * when a direct CSS color is provided and the tab is active.
+    */
+    getTabStyle(tab) {
+      const isActive = this.getIsTabCurrent(tab);
+      const color = this.getbgColor();
+      if (!isActive || !this.isDirectCssColor(color)) return {};
+      return {
+        backgroundColor: color,
+        color: '#fff',
+      };
+    },
+    
     /**
      * Set Tabs
      * @returns Tabs Object
@@ -350,6 +379,16 @@ export default {
      */
     getCurrentColor() {
       return this.panel.currentColor ?? 'primary'
+    },
+
+    /**
+    * Get the color for the current tab
+    *
+    * @returns {*|string}
+    */
+    getbgColor() {
+        // Default to a Tailwind color that definitely exists in Nova
+        return this.panel.bgColor ?? 'sky'
     },
 
     /**

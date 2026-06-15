@@ -25,25 +25,44 @@
               <a
                 v-for="(tab, key) in getSortedTabs(tabs)"
                 :key="key"
-                :class="
+                :class="[
                   getIsTabCurrent(tab)
-                    ? 'active text-' + getCurrentColor() + '-500 font-bold'
-                    : 'font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
-                "
+                    ? isDirectCssColor(getbgColor())
+                      ? 'active font-bold'
+                      : 'active text-' + getCurrentColor() + '-500 font-bold'
+                    : 'font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200',
+                  !getIsTabCurrent(tab) || !isDirectCssColor(getbgColor())
+                    ? 'bg-white dark:bg-gray-800'
+                    : '',
+                ]"
+                :style="getTabStyle(tab)"
                 :dusk="tab.slug + '-tab'"
                 :ref="tab.slug + '-tab'"
-                class="block relative shrink-0 flex-grow overflow-hidden bg-white dark:bg-gray-800 py-4 px-4 text-center text-sm focus:z-10 cursor-pointer"
+                class="block relative shrink-0 flex-grow overflow-hidden py-4 px-4 text-center text-sm focus:z-10 cursor-pointer"
                 @click.prevent="handleTabClick(tab)"
               >
+                <span
+                  v-if="tab.properties.icon"
+                  class="mr-2 inline-flex items-center justify-center"
+                >
+                  <i :class="tab.properties.icon"></i>
+                </span>
                 <span class="capitalize">{{ tab.properties.title }}</span>
                 <span
                   aria-hidden="true"
                   class="absolute inset-x-0 bottom-0 h-0.5"
                   :class="[
-                    getIsTabCurrent(tab)
-                      ? 'bg-' + getCurrentColor() + '-500'
-                      : 'bg-gray-200 dark:bg-gray-700',
+                    getIsTabCurrent(tab) && !isDirectCssColor(getbgColor())
+                      ? 'bg-' + getbgColor() + '-500'
+                      : !getIsTabCurrent(tab)
+                        ? 'bg-gray-200 dark:bg-gray-700'
+                        : '',
                   ]"
+                  :style="
+                    getIsTabCurrent(tab) && isDirectCssColor(getbgColor())
+                      ? { backgroundColor: getbgColor() }
+                      : {}
+                  "
                 ></span>
               </a>
             </nav>
@@ -118,21 +137,21 @@
 </template>
 
 <script>
-import BehavesAsPanel from '../mixins/BehavesAsPanel'
-import HasTabs from '../mixins/HasTabs'
+import BehavesAsPanel from "../mixins/BehavesAsPanel";
+import HasTabs from "../mixins/HasTabs";
 
 export default {
   mixins: [BehavesAsPanel, HasTabs],
   data: () => ({
-    tabMode: 'form',
+    tabMode: "form",
   }),
   methods: {
     getAllFieldsExceptRelatable(tab) {
-      return tab.fields.filter(field => !field.relatable)
+      return tab.fields.filter((field) => !field.relatable);
     },
     getAllRelatableFields(tab) {
-      return tab.fields.filter(field => field.relatable)
+      return tab.fields.filter((field) => field.relatable);
     },
   },
-}
+};
 </script>

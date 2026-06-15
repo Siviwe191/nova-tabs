@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 use Laravel\Nova\Contracts\ListableField;
 use Laravel\Nova\Contracts\Resolvable;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\FieldCollection;
 
 trait HasActionsInTabs
 {
-    public function detailFields(NovaRequest $request): mixed
+    public function detailFields(NovaRequest $request): FieldCollection
     {
         return $this->availableFields($request)
             ->when($request->viaRelationship(), $this->fieldResolverCallback($request))

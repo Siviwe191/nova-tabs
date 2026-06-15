@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 
+
 trait HasTabs
 {
     /**
@@ -19,24 +20,39 @@ trait HasTabs
      * @param  string  $label
      * @return Collection
      */
-    protected function resolvePanelsFromFields(NovaRequest $request, FieldCollection $fields, $label)
+    protected function resolvePanelsFromFields(NovaRequest $request, FieldCollection $fields, string $label): Collection
     {
         [$defaultFields, $fieldsWithPanels] = $fields->each(function ($field) {
-            if ($field instanceof BehavesAsPanel && !$field->assignedPanel instanceof Tabs) {
+            $assignedPanel = is_object($field) ? data_get($field,'assignedPanel') : null;
+            if ($field instanceof BehavesAsPanel && !($assignedPanel instanceof Tabs)) {
                 $field->asPanel();
             }
         })->partition(function ($field) {
-            return !isset($field->panel) || blank($field->panel);
+            $panel = is_object($field) ? data_get($field,'panel') : null;
+            return empty($panel) || blank($panel);
         });
 
         $panels = $fieldsWithPanels->groupBy(function ($field) {
-            return $field->panel;
-        })->transform(function ($fields, $name) {
-            if ($fields[0]->assignedPanel instanceof Tabs) {
-                return Tabs::mutate($name, $fields);
+            return is_object($field) ? data_get($field,'panel','') : '';
+        })->transform(function ($groupedFields, $name) {
+            $name = (string)$name;
+
+            $items = $groupedFields instanceof \Illuminate\Support\Collection
+            ? $groupedFields->values()->all()
+            : array_values($groupedFields);
+
+            $fieldCollection = new FieldCollection($items);
+
+            $firstField = $ietm[0] ?? null;
+
+            $assignedPanel =  $firstField ? data_get($firstField, 'assignedPanel') : null;
+            
+            
+            if ($assignedPanel instanceof Tabs) {
+                return Tabs::mutate($name, $fieldCollection);
             }
 
-            return Panel::mutate($name, $fields);
+            return Panel::mutate($name, $fieldCollection);
         })->toBase();
 
         if ($panels->where('component', 'tabs')->isEmpty()) {
@@ -48,29 +64,48 @@ trait HasTabs
         }
 
         [$relationshipUnderTabs, $panels] = $panels->partition(function ($panel) {
-            return $panel->component === 'relationship-panel' && $panel->meta['fields'][0]->assignedPanel instanceof Tabs;
+            if(!is_object($panel) || data_get($panel,'component') !== 'relationship-panel'){
+                return false;
+            }
+
+            $fieldInPanel = data_get($panel->meta,'fields',[]);
+            $firstField = $fieldInPanel[0] ?? null;
+
+            return $firstField  && data_get($firstField ,'panel') instanceof Tabs;
+            
         });
 
         $panels->transform(function ($panel, $key) use ($relationshipUnderTabs) {
 
-            if ($panel->component === 'tabs') {
+            if (is_object($panel) && data_get($panel,'component') === 'tabs') {
 
+                 $fieldInPanel = data_get($panel->meta,'fields',[]);
+                 $firstField = $fieldInPanel[0] ?? null;
+                 $assignedPanel = $firstField ?  data_get($firstField,'assignedPanel') :  null;
+
+
+                if($firstField && $assignedPanel){
                 foreach ($relationshipUnderTabs as $rel) {
-                    if ($panel->meta['fields'][0]->assignedPanel === $rel->meta['fields'][0]->assignedPanel) {
-                        $panel->meta['fields'][] = $rel->meta['fields'][0];
+                    $relFields = data_get($rel->meta, 'fields',[]);
+                    $firstRelField = $relFields[0] ?? null;
+
+                    if ($firstRelField && data_get($firstRelField,'panel') === $assignedPanel) {
+                        $panel->meta['fields'][] = $firstRelField;
                     }
                 }
 
-                $panel->name = $panel->meta['fields'][0]->panel;
-                $panel->showTitle = $panel->meta['fields'][0]->assignedPanel->showTitle;
-                $panel->showToolbar = $panel->meta['fields'][0]->assignedPanel->showToolbar;
-                $panel->slug = $panel->meta['fields'][0]->assignedPanel->slug;
-                $panel->currentColor = $panel->meta['fields'][0]->assignedPanel->currentColor;
-                $panel->errorColor = $panel->meta['fields'][0]->assignedPanel->errorColor;
-                $panel->retainTabPosition = $panel->meta['fields'][0]->assignedPanel->retainTabPosition;
+                $panel->name = data_get($firstField, 'panel.name', $panel->name ?? '');
+                $panel->showTitle = data_get($assignedPanel, 'showTitle', true);
+                $panel->showToolbar = data_get($assignedPanel, 'showToolbar', false);
+                $panel->slug = data_get($assignedPanel, 'slug', '');
+                $panel->currentColor = data_get($assignedPanel, 'currentColor');
+                $panel->bgColor = data_get($assignedPanel, 'bgColor');
+                $panel->errorColor = data_get($assignedPanel, 'errorColor');
+                $panel->retainTabPosition = data_get($assignedPanel, 'retainTabPosition', false);
             }
+        }
 
-            return $panel;
+            return $panel ?? null;
         });
 
         return $this->panelsWithDefaultLabel(
@@ -86,7 +121,7 @@ trait HasTabs
      * @param  string  $label
      * @return \Illuminate\Support\Collection<int, \Laravel\Nova\Panel>
      */
-    protected function panelsWithDefaultLabel(Collection $panels, FieldCollection $fields, $label)
+    protected function panelsWithDefaultLabel(Collection $panels, FieldCollection $fields, string $label) : Collection
     {
         return $panels->values()
             ->when($panels->where('name', $label)->isEmpty(), function ($panels) use ($label, $fields) {

@@ -36,6 +36,9 @@ class Tabs extends Panel
 
     public string $errorColor = 'red';
 
+    /** @var string|null */
+    public ?string $bgColor = null;
+
     /**
      * Create a new panel instance.
      *
@@ -65,6 +68,16 @@ class Tabs extends Panel
         $this->currentColor = $color;
 
         return $this;
+    }
+
+    public function withCurrentColorFromRequest(string $color)
+    {
+        $this->bgColor = $color;
+        if($this->currentColor === null){
+            $this->currentColor = $color;
+        }
+
+            return $this;
     }
 
     public function withErrorColor(string $color): self
@@ -142,8 +155,7 @@ class Tabs extends Panel
 
     public function addFields(TabContract $tab): self
     {
-        $this->tabs[] = $tab;
-
+        
         /** @var Tab $tab */
         foreach ($tab->getFields() as $field) {
             if ($field instanceof Panel) {
@@ -159,7 +171,7 @@ class Tabs extends Panel
                 /** @var Field $field */
                 if (!isset($field->panel)) {
                     $field->assignedPanel = $this;
-                    $field->panel = $this->name;
+                    $field->panel = $this;
                 }
 
                 $this->addFields(
@@ -172,7 +184,7 @@ class Tabs extends Panel
                 continue;
             }
 
-            $field->panel = $this->name;
+            $field->panel = $this;
             $field->assignedPanel = $this;
 
             $meta = [
@@ -219,7 +231,9 @@ class Tabs extends Panel
             'slug' => $this->slug,
             'retainTabPosition' => $this->retainTabPosition,
             'currentColor' => $this->currentColor,
-            'errorColor' => $this->errorColor
+            'errorColor' => $this->errorColor,
+            'currentColor' => $this->currentColor.
+            'bgColor' => $this->bgColor
         ]);
 
         return $result;

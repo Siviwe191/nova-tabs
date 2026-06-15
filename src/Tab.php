@@ -37,6 +37,9 @@ class Tab implements TabContract, JsonSerializable, Arrayable
     /** @var array */
     protected $relationshipAttributeVisibility = [];
 
+    /** @var string|null */
+    protected $icon = null;
+
     public function __construct($title, array $fields, int $position = 0)
     {
         $this->title = $title;
@@ -54,6 +57,18 @@ class Tab implements TabContract, JsonSerializable, Arrayable
         $this->position = $position;
 
         return $this;
+    }
+
+
+    public function icon(string $iconClass):self{
+        $this->$icon = $iconClass;
+
+        return $this;
+    }
+
+    public function withIcon($iconClass):self
+    {
+        return $this->icon($iconClass);
     }
 
     public function name(string $name): self
@@ -157,6 +172,7 @@ class Tab implements TabContract, JsonSerializable, Arrayable
             'fields' => $this->getFields(),
             'name' => $this->getName(),
             'slug' => $this->getSlug(),
+            'icon' => $this->$icon
             'shouldShow' => $this->shouldShow(),
             'headingVisibilityForRelationshipAttributes' => $this->getHeadingVisibilityForRelationshipAttributes(),
         ];
