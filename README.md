@@ -1,11 +1,12 @@
 # Nova tabs
 
 [![PHP Version Require](http://poser.pugx.org/shuvroroy/nova-tabs/require/php)](https://packagist.org/packages/shuvroroy/nova-tabs)
-[![Latest Stable Version](http://poser.pugx.org/shuvroroy/nova-tabs/v)](https://packagist.org/packages/shuvroroy/nova-tabs) 
-[![Total Downloads](http://poser.pugx.org/shuvroroy/nova-tabs/downloads)](https://packagist.org/packages/shuvroroy/nova-tabs) 
-[![License](http://poser.pugx.org/shuvroroy/nova-tabs/license)](https://packagist.org/packages/shuvroroy/nova-tabs) 
+[![Latest Stable Version](http://poser.pugx.org/shuvroroy/nova-tabs/v)](https://packagist.org/packages/shuvroroy/nova-tabs)
+[![Total Downloads](http://poser.pugx.org/shuvroroy/nova-tabs/downloads)](https://packagist.org/packages/shuvroroy/nova-tabs)
+[![License](http://poser.pugx.org/shuvroroy/nova-tabs/license)](https://packagist.org/packages/shuvroroy/nova-tabs)
 
 This package will help you to create tabs in your resource detail & form page.
+"This package is a fork of shuvroroy/nova-tabs with added features."
 
 <img width="1490" alt="Screenshot 2023-05-24 at 7 56 19 PM" src="https://github.com/shuvroroy/nova-tabs/assets/21066418/04d25d67-f641-4c14-8c03-a100f14ffb9e">
 
@@ -16,14 +17,14 @@ This package will help you to create tabs in your resource detail & form page.
 ## Requirements
 
 - PHP (^8.1 or higher)
-- Laravel Nova (^4.12 or higher)
+- Laravel Nova (^5.0 or higher)
 
 ## Installation
 
 Require the package with composer
 
 ```bash
-composer require shuvroroy/nova-tabs
+composer require siviwe191/nova-tabs
 ```
 
 ## Usage
@@ -91,7 +92,7 @@ class User extends Resource
 
                     HasMany::make(__('Posts'), 'posts', Post::class),
                 ])->showHeadingForRelationships(['posts']),
-                
+
                 Tab::make(__('Additional Information'), [
                     Trix::make(__('Bio'), 'bio')
                         ->alwaysShow()
@@ -158,12 +159,12 @@ Tabs are always shown on edit view as of Nova 4 for now.
 
 It's possible to use a `Tab` class instead of an array to represent your tabs.
 
-| Property   | Type                | Default | Description                                                                                                                         |
-| ---------- | ------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| name       | `string`            | `null`  | The name of the tab, used for the slug. Defaults to the title if not set                                                            |
-| showIf     | `bool` or `Closure` | `null`  | If the result is truthy the tab will be shown. `showIf` takes priority over `showUnless` and if neither are set, `true` is assumed. |
-| showUnless | `bool` or `Closure` | `null`  | If the result is falsy the tab will be shown. `showIf` takes priority over `showUnless` and if neither are set, `true` is assumed.  |
-| showHeadingForRelationships | `array` | `array`  | This is show a headings for individual relationship field based on array attribute value |
+| Property                    | Type                | Default | Description                                                                                                                         |
+| --------------------------- | ------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| name                        | `string`            | `null`  | The name of the tab, used for the slug. Defaults to the title if not set                                                            |
+| showIf                      | `bool` or `Closure` | `null`  | If the result is truthy the tab will be shown. `showIf` takes priority over `showUnless` and if neither are set, `true` is assumed. |
+| showUnless                  | `bool` or `Closure` | `null`  | If the result is falsy the tab will be shown. `showIf` takes priority over `showUnless` and if neither are set, `true` is assumed.  |
+| showHeadingForRelationships | `array`             | `array` | This is show a headings for individual relationship field based on array attribute value                                            |
 
 ## Customization
 
@@ -194,6 +195,9 @@ export default {
 - [Shuvro Roy](https://github.com/shuvroroy)
 - [Emini Arts GmbH](https://github.com/eminiarts)
 - [All Contributors](../../contributors)
+
+Copyright (c) 2021 Shuvro Roy
+Copyright (c) 2026 Siviwe191
 
 ## License
 
