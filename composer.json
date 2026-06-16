@@ -1,6 +1,6 @@
 {
     "name": "siviwe191/nova-tabs",
-    "description": "An updated Laravel Nova tool to create tabs in nova work 5 and added ability to add fontawesome icons and change entire background of tab",
+    "description": "Updated Laravel Nova tool for creating tabs, now compatible with Nova 5. Includes support for Font Awesome icons and customizable tab backgrounds",
     "keywords": [
         "laravel",
         "nova"
