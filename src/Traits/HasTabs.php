@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ShuvroRoy\NovaTabs\Traits;
+namespace siviwe191\NovaTabs\Traits;
 
-use ShuvroRoy\NovaTabs\Tabs;
+use siviwe191\NovaTabs\Tabs;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Contracts\BehavesAsPanel;
 use Laravel\Nova\Fields\FieldCollection;

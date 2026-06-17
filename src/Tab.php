@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ShuvroRoy\NovaTabs;
+namespace siviwe191\NovaTabs;
 
 use Closure;
-use ShuvroRoy\NovaTabs\Contracts\TabContract;
+use siviwe191\NovaTabs\Contracts\TabContract;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -60,7 +60,8 @@ class Tab implements TabContract, JsonSerializable, Arrayable
     }
 
 
-    public function icon(string $iconClass):self{
+    public function icon(string $iconClass):self
+    {
         $this->$icon = $iconClass;
 
         return $this;

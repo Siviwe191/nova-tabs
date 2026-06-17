@@ -7,7 +7,7 @@
     ],
     "authors": [
         {
-            "name": "Siviwe191",
+            "name": "Siviwe",
             "email": "svellem51@gmail.com"
         }
     ],
@@ -18,14 +18,14 @@
     },
     "autoload": {
         "psr-4": {
-            "ShuvroRoy\\NovaTabs\\": "src/",
-            "ShuvroRoy\\NovaTabs\\Tests\\": "tests/"
+            "siviwe191\\NovaTabs\\": "src/",
+            "siviwe191\\NovaTabs\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "ShuvroRoy\\NovaTabs\\TabsServiceProvider"
+                "siviwe191\\NovaTabs\\TabsServiceProvider"
             ]
         }
     },

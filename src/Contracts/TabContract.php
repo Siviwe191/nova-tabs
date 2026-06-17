@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ShuvroRoy\NovaTabs\Contracts;
+namespace siviwe191\NovaTabs\Contracts;
 
 use Closure;
 

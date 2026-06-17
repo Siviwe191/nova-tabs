@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ShuvroRoy\NovaTabs;
+namespace siviwe191\NovaTabs;
 
 use Closure;
-use ShuvroRoy\NovaTabs\Contracts\TabContract;
+use Ssiviwe191\NovaTabs\Contracts\TabContract;
 use Illuminate\Http\Resources\MergeValue;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;

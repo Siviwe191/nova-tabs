@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ShuvroRoy\NovaTabs\Traits;
+namespace siviwe191\NovaTabs\Traits;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Laravel\Nova\Contracts\ListableField;

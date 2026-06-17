@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ShuvroRoy\NovaTabs;
+namespace siviwe191\NovaTabs;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Events\ServingNova;
