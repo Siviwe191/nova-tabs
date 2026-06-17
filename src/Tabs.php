@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace siviwe191\NovaTabs;
 
 use Closure;
-use Ssiviwe191\NovaTabs\Contracts\TabContract;
+use siviwe191\NovaTabs\Contracts\TabContract;
 use Illuminate\Http\Resources\MergeValue;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
