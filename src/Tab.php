@@ -172,7 +172,7 @@ class Tab implements TabContract, JsonSerializable, Arrayable
             'fields' => $this->getFields(),
             'name' => $this->getName(),
             'slug' => $this->getSlug(),
-            'icon' => $this->$icon,
+            'icon' => $this->icon,
             'shouldShow' => $this->shouldShow(),
             'headingVisibilityForRelationshipAttributes' => $this->getHeadingVisibilityForRelationshipAttributes(),
         ];
