@@ -232,7 +232,7 @@ class Tabs extends Panel
             'retainTabPosition' => $this->retainTabPosition,
             'currentColor' => $this->currentColor,
             'errorColor' => $this->errorColor,
-            'currentColor' => $this->currentColor.
+            'currentColor' => $this->currentColor,
             'bgColor' => $this->bgColor
         ]);
 
