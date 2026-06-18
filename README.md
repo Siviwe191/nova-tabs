@@ -1,9 +1,9 @@
 # Nova tabs
 
-[![PHP Version Require](http://poser.pugx.org/shuvroroy/nova-tabs/require/php)](https://packagist.org/packages/shuvroroy/nova-tabs)
-[![Latest Stable Version](http://poser.pugx.org/shuvroroy/nova-tabs/v)](https://packagist.org/packages/shuvroroy/nova-tabs)
-[![Total Downloads](http://poser.pugx.org/shuvroroy/nova-tabs/downloads)](https://packagist.org/packages/shuvroroy/nova-tabs)
-[![License](http://poser.pugx.org/shuvroroy/nova-tabs/license)](https://packagist.org/packages/shuvroroy/nova-tabs)
+[![PHP Version Require](http://poser.pugx.org/shuvroroy/nova-tabs/require/php)](https://packagist.org/packages/siviwe191/nova-tabs)
+[![Latest Stable Version](http://poser.pugx.org/shuvroroy/nova-tabs/v)](https://packagist.org/packages/siviwe191/nova-tabs)
+[![Total Downloads](http://poser.pugx.org/shuvroroy/nova-tabs/downloads)](https://packagist.org/packages/siviwe191/nova-tabs)
+[![License](http://poser.pugx.org/shuvroroy/nova-tabs/license)](https://packagist.org/packages/siviwe191/nova-tabs)
 
 This package will help you to create tabs in your resource detail & form page.
 "This package is a fork of shuvroroy/nova-tabs with added features."
@@ -196,9 +196,10 @@ export default {
 - [Emini Arts GmbH](https://github.com/eminiarts)
 - [All Contributors](../../contributors)
 
-Copyright (c) 2021 Shuvro Roy
-Copyright (c) 2026 Siviwe191
-
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## version
+
+beta v1.0
