@@ -25,15 +25,12 @@
                 :dusk="tab.slug + '-tab'"
                 :class="[
                   getIsTabCurrent(tab)
-                    ? isDirectCssColor(getbgColor())
-                      ? 'active font-bold'
-                      : 'active text-' + getCurrentColor() + '-500 font-bold'
+                    ? getbgColor()
+                      ? `active font-bold bg-${getbgColor()}-500`
+                      : `active font-bold text-${getCurrentColor()}-500`
                     : 'font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200',
-                  !getIsTabCurrent(tab) || !isDirectCssColor(getbgColor())
-                    ? 'bg-white dark:bg-gray-800'
-                    : '',
+                  !getIsTabCurrent(tab) ? 'bg-white dark:bg-gray-800' : '',
                 ]"
-                :style="getTabStyle(tab)"
                 class="block relative shrink-0 flex-grow overflow-hidden py-4 px-4 text-center text-sm focus:z-10 cursor-pointer"
                 @click.prevent="handleTabClick(tab)"
               >
@@ -49,14 +46,9 @@
                   aria-hidden="true"
                   class="absolute inset-x-0 bottom-0 h-0.5"
                   :class="
-                    isDirectCssColor(getbgColor())
-                      ? ''
+                    getbgColor()
+                      ? 'bg-' + getbgColor() + '-500'
                       : 'bg-' + getCurrentColor() + '-500'
-                  "
-                  :style="
-                    isDirectCssColor(getbgColor())
-                      ? { backgroundColor: getCurrentColor() }
-                      : {}
                   "
                 ></span>
               </a>
