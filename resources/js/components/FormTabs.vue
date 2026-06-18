@@ -28,7 +28,7 @@
                 :class="[
                   getIsTabCurrent(tab)
                     ? getbgColor()
-                      ? `active font-bold bg-${getbgColor()}-500`
+                      ? `active font-bold bg-${getbgColor()}-500 text-white`
                       : `active font-bold text-${getCurrentColor()}-500`
                     : 'font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200',
                   !getIsTabCurrent(tab) ? 'bg-white dark:bg-gray-800' : '',
@@ -49,7 +49,7 @@
                   aria-hidden="true"
                   class="absolute inset-x-0 bottom-0 h-0.5"
                   :class="[
-                    getIsTabCurrent(tab) && !isDirectCssColor(getbgColor())
+                    getIsTabCurrent(tab)
                       ? 'bg-' + getbgColor() + '-500'
                       : !getIsTabCurrent(tab)
                         ? 'bg-gray-200 dark:bg-gray-700'

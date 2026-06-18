@@ -70,12 +70,10 @@ class Tabs extends Panel
         return $this;
     }
 
-    public function withCurrentColorFromRequest(string $color)
+    public function withCurrentColorFromRequest(string $color): self
     {
         $this->bgColor = $color;
-        if($this->currentColor === null){
-            $this->currentColor = $color;
-        }
+        
 
             return $this;
     }
