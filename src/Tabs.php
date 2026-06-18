@@ -228,7 +228,6 @@ class Tabs extends Panel
             'showTitle' => $this->showTitle,
             'slug' => $this->slug,
             'retainTabPosition' => $this->retainTabPosition,
-            'currentColor' => $this->currentColor,
             'errorColor' => $this->errorColor,
             'currentColor' => $this->currentColor,
             'bgColor' => $this->bgColor
