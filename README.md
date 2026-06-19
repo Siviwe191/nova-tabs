@@ -45,10 +45,10 @@ use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use ShuvroRoy\NovaTabs\Tab;
-use ShuvroRoy\NovaTabs\Tabs;
-use ShuvroRoy\NovaTabs\Traits\HasActionsInTabs;
-use ShuvroRoy\NovaTabs\Traits\HasTabs;
+use siviwe191\NovaTabs\Tab;
+use siviwe191\NovaTabs\Tabs;
+use siviwe191\NovaTabs\Traits\HasActionsInTabs;
+use siviwe191\NovaTabs\Traits\HasTabs;
 
 class User extends Resource
 {
@@ -121,10 +121,10 @@ The first tab in every `Tabs` instance will be auto-selected.
 ```php
 <?php
 
-use ShuvroRoy\NovaTabs\Tab;
-use ShuvroRoy\NovaTabs\Tabs;
-use ShuvroRoy\NovaTabs\Traits\HasActionsInTabs;
-use ShuvroRoy\NovaTabs\Traits\HasTabs;
+use siviwe191\NovaTabs\Tab;
+use siviwe191\NovaTabs\Tabs;
+use siviwe191\NovaTabs\Traits\HasActionsInTabs;
+use siviwe191\NovaTabs\Traits\HasTabs;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -151,7 +151,7 @@ class User extends Resource
 
 ### Tabs on Edit View
 
-Tabs are always shown on edit view as of Nova 4 for now.
+Tabs are always shown on edit view as of Nova 5 for now.
 
 <img width="1488" alt="Screenshot 2023-05-24 at 7 54 55 PM" src="https://github.com/shuvroroy/nova-tabs/assets/21066418/9b6a9850-9ea2-4386-aa82-59541903cb96">
 
