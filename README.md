@@ -151,7 +151,7 @@ class User extends Resource
 
 ### Tabs on Edit View
 
-Tabs are always shown on edit view as of Nova 5 for now.
+Tabs are always shown on edit view as of Nova 4 for now.
 
 <img width="1488" alt="Screenshot 2023-05-24 at 7 54 55 PM" src="https://github.com/shuvroroy/nova-tabs/assets/21066418/9b6a9850-9ea2-4386-aa82-59541903cb96">
 
